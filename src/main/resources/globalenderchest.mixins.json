@@ -5,12 +5,8 @@
     "compatibilityLevel": "JAVA_17",
     "mixins": [
         "AccessorEnderChestInventory",
-        "AccessorSimpleInventory",
         "MixinEnderChestBlock",
-        "MixinEnderChestBlockEntity",
-        "MixinEnderChestInventory",
-        "MixinPlayerEntity",
-        "MixinViewerCountManager"
+        "MixinEnderChestInventory"
     ],
     "injectors": {
         "defaultRequire": 1

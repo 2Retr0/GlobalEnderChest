@@ -10,13 +10,6 @@ archivesBaseName = project.archives_base_name
 version          = "${project.mod_version}+${project.minecraft_version}"
 group            = project.maven_group
 
-repositories {
-    maven {
-        name = 'Ladysnake Mods'
-        url = 'https://ladysnake.jfrog.io/artifactory/mods'
-    }
-}
-
 dependencies {
     // To change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
@@ -30,15 +23,6 @@ dependencies {
     // These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
 
     // modImplementation "net.fabricmc.fabric-api:fabric-api-deprecated:${project.fabric_version}"
-
-    // Adds a dependency on the base cardinal components module (required by every other module)
-    // Replace modImplementation with modApi if you expose components in your own API
-    //	modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cca_version}"
-    //	// Adds a dependency on a specific module
-    //	modImplementation "dev.onyxstudios.cardinal-components-api:block:${project.cca_version}"
-    //	// Includes Cardinal Components API as a Jar-in-Jar dependency (optional)
-    //	include "dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cca_version}"
-    //	include "dev.onyxstudios.cardinal-components-api:block:${project.cca_version}"
 }
 
 processResources {

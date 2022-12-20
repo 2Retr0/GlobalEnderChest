@@ -11,7 +11,7 @@ public class EnderChestState extends PersistentState {
     public static final String INVENTORY_KEY = "inventory";
     private final EnderChestInventory inventory;
 
-    public EnderChestState(@NotNull EnderChestInventory inventory) {
+    private EnderChestState(@NotNull EnderChestInventory inventory) {
         this.inventory = inventory;
     }
 
@@ -26,17 +26,11 @@ public class EnderChestState extends PersistentState {
         return nbt;
     }
 
-    public static EnderChestState createState() {
+    public static EnderChestState create() {
         return new EnderChestState(new EnderChestInventory());
     }
 
     public EnderChestInventory getInventory() {
         return inventory;
-    }
-
-    public void addItem(ItemStack itemStack) {
-        inventory.addStack(itemStack);
-        inventory.markDirty();
-        this.markDirty();
     }
 }

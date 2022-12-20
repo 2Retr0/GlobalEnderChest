@@ -2,6 +2,7 @@ package retr0.globalenderchest;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
+import net.minecraft.inventory.EnderChestInventory;
 import net.minecraft.world.World;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +13,11 @@ public class GlobalEnderChest implements ModInitializer {
 	// That way, it's clear which mod wrote info, warnings, and errors.
 	public static final Logger LOGGER = LoggerFactory.getLogger("modid");
 
-	public static EnderChestState enderChestState;
+	private static EnderChestState enderChestState;
+
+	public static EnderChestInventory getInventory() {
+		return enderChestState.getInventory();
+	}
 
 	@Override
 	public void onInitialize() {
@@ -43,10 +48,9 @@ public class GlobalEnderChest implements ModInitializer {
 		ServerWorldEvents.LOAD.register(((server, world) -> {
 			if (world.getRegistryKey() != World.OVERWORLD) return;
 
-			enderChestState = server.getOverworld().getPersistentStateManager().getOrCreate(EnderChestState.createState()::readNbt, EnderChestState::createState, "inventory_test");
+			enderChestState = server.getOverworld().getPersistentStateManager().getOrCreate(EnderChestState.create()::readNbt, EnderChestState::create, "inventory_test");
 
 			enderChestState.getInventory().addListener(inventory -> {
-				LOGGER.info("BEEB!");
 				enderChestState.markDirty();
 			});
 
