@@ -2,14 +2,18 @@ package retr0.globalenderchest.mixin;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EnderChestInventory;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import retr0.globalenderchest.GlobalEnderChest;
 
 @Mixin(EnderChestInventory.class)
-public abstract class MixinEnderChestInventory extends SimpleInventory {
+public abstract class MixinEnderChestInventory {
     @Inject(method = "onOpen", at = @At("TAIL"))
     public void onOpen(PlayerEntity player, CallbackInfo ci) {
         var activeBlockEntity = ((AccessorEnderChestInventory) player.getEnderChestInventory()).getActiveBlockEntity();
@@ -34,4 +38,3 @@ public abstract class MixinEnderChestInventory extends SimpleInventory {
         player.getEnderChestInventory().setActiveBlockEntity(null);
     }
 }
-
