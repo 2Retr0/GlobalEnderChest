@@ -1,0 +1,6 @@
+{
+    "globalenderchest.toast.header": "Migration required",
+    "globalenderchest.toast": "All personal items must be removed before accessing global inventory!",
+
+    "globalenderchest.migration.success": "Items inserted into an ender chest will now sync across all players!"
+}

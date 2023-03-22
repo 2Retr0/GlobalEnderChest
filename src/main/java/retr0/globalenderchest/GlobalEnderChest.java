@@ -12,72 +12,32 @@ import net.minecraft.inventory.EnderChestInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.NetherStarItem;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import retr0.globalenderchest.network.PacketRegistry;
 
 import static net.minecraft.item.Items.NETHER_STAR;
 
 public class GlobalEnderChest implements ModInitializer {
-	// This logger is used to write text to the console and the log file.
-	// It is considered best practice to use your mod id as the logger's name.
-	// That way, it's clear which mod wrote info, warnings, and errors.
-	public static final Logger LOGGER = LoggerFactory.getLogger("modid");
+    public static final String MOD_ID = "globalenderchest";
+    // This logger is used to write text to the console and the log file.
+    // It is considered best practice to use your mod id as the logger's name.
+    // That way, it's clear which mod wrote info, warnings, and errors.
+    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-	private static EnderChestState enderChestState;
+    @Override
+    public void onInitialize() {
+        // This code runs as soon as Minecraft is in a mod-load-ready state.
+        // However, some things (like resources) may still be uninitialized.
+        // Proceed with mild caution.
+        LOGGER.info("Initialized GlobalEnderChest!");
+        EnderChestState.register();
 
-	public static EnderChestInventory getInventory() {
-		return enderChestState.getInventory();
-	}
-
-	@Override
-	public void onInitialize() {
-		/**
-		 * Send a packet to the server, have the handler on the server modify the stacks and make sure the slots are marked dirty.
-		 */
-
-
-		// This code runs as soon as Minecraft is in a mod-load-ready state.
-		// However, some things (like resources) may still be uninitialized.
-		// Proceed with mild caution.
-		/**
-		 * Loose overview is
-		 * 1. get the persistent state manager from a ServerWorld
-		 * 2. it has PersistentStateManager.getOrCreate() which takes
-		 *         an id
-		 *         a Function that converts NBT to a PersistentState
-		 *         a Supplier that creates a PersistentState from nothing
-		 * 3. Create a subclass of PersistentState. This stores your data in fields and saves it via writeNbt
-		 * 4. When you want your data, call PersistentStateManager.getOrCreate(). If no state with the given id exists,
-		 *    it creates it with the Supplier argument. Otherwise it reads it from NBT with the Function argument.
-		 *
-		 * As Matti mentions, you can also use PersistentStateManager.getOrCreate() in ServerWorldEvents.LOAD to ensure
-		 * the state exists, then use the PersistentStateManager.get() elsewhere
-		 */
-
-		LOGGER.info("Hello Fabric world!");
-		ServerWorldEvents.LOAD.register(((server, world) -> {
-			if (world.getRegistryKey() != World.OVERWORLD) return;
-
-			enderChestState = server.getOverworld().getPersistentStateManager().getOrCreate(EnderChestState.create()::readNbt, EnderChestState::create, "inventory_test");
-
-			enderChestState.getInventory().addListener(inventory -> {
-				enderChestState.markDirty();
-			});
-
-			LOGGER.info(enderChestState.getInventory().toString());
-		}));
-
-		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
-			handler.player.getEnderChestInventory().setStack(0, NETHER_STAR.getDefaultStack());
-		});
-
-		// ServerPlayerEntity#openHandledScreen   then, when we close...
-		//     -> ServerPlayerEntity#closeScreenHandler
-		//     -> GenericContainerScreenHandler#close
-		//     -> EnderChestInventory#onClose
-		//            * Checks the inventory's activeBlockEntity, but it is never set.
-		// We should instead close the player's EnderChestInventory's activeBlockEntity and set it to null!
-	}
+        ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
+            handler.player.getEnderChestInventory().setStack(0, NETHER_STAR.getDefaultStack());
+        });
+    }
 }

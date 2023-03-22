@@ -3,12 +3,15 @@
     "minVersion": "0.8",
     "package": "retr0.globalenderchest.mixin",
     "compatibilityLevel": "JAVA_17",
+    "injectors": {
+        "defaultRequire": 1
+    },
     "mixins": [
         "AccessorEnderChestInventory",
         "MixinEnderChestBlock",
         "MixinEnderChestInventory"
     ],
-    "injectors": {
-        "defaultRequire": 1
-    }
+    "client": [
+        "AccessorSystemToast"
+    ]
 }

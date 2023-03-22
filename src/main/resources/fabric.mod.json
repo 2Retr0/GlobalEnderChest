@@ -4,14 +4,14 @@
     "version": "${version}",
 
     "name": "GlobalEnderChest",
-    "description": "TODO!",
+    "description": "Changes ender chests to have a singular global inventory!",
     "authors": [
         "2Retr0"
     ],
     "contact": {
         "homepage": "https://github.com/2Retr0/globalenderchest",
-        "issues": "https://github.com/2Retr0/globalenderchest/issues",
-        "sources": "https://github.com/2Retr0/globalenderchest"
+        "issues":   "https://github.com/2Retr0/globalenderchest/issues",
+        "sources":  "https://github.com/2Retr0/globalenderchest"
     },
 
     "license": "MIT",
@@ -19,17 +19,13 @@
 
     "environment": "*",
     "entrypoints": {
-        "main": [
-            "retr0.globalenderchest.GlobalEnderChest"
-        ]
+        "main":   [ "retr0.globalenderchest.GlobalEnderChest" ],
+        "client": [ "retr0.globalenderchest.GlobalEnderChestClient" ]
     },
-    "mixins": [
-        "globalenderchest.mixins.json"
-    ],
+    "mixins": [ "globalenderchest.mixins.json" ],
 
     "depends": {
         "fabricloader": ">=0.14.9",
-        "fabric-api": "*",
-        "minecraft": "~1.19"
+        "fabric-api": "*"
     }
 }
