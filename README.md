@@ -1,5 +1,5 @@
 # GlobalEnderChest
-GlobalEnderChest is a small mod which enforces a global inventory for ender chests rather than the per-player system currently in the game. This mod is probably best suited for small servers for mitigating the hassle of keeping track of resources stored in personal ender chest inventories. 
+GlobalEnderChest is a small mod which *enforces a global inventory for ender chests rather than the per-player system currently in the game*. This mod is probably best suited for small servers to alleviate the hassle of keeping track of resources stored in friends' personal ender chest inventories. GlobalEnderChest is simple but designed to be flexible—specifically:
 
 ## Features
 - **Replaces all personal ender inventories with a global instance** *(the contents of such are accessible for all players on a server)*.
