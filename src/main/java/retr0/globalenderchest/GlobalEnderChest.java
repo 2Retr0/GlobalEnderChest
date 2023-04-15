@@ -35,9 +35,5 @@ public class GlobalEnderChest implements ModInitializer {
         // Proceed with mild caution.
         LOGGER.info("Initialized GlobalEnderChest!");
         EnderChestState.register();
-
-        ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
-            handler.player.getEnderChestInventory().setStack(0, NETHER_STAR.getDefaultStack());
-        });
     }
 }
