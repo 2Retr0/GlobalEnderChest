@@ -1,17 +1,33 @@
 plugins {
-    id 'fabric-loom' version '1.1-SNAPSHOT'
+    id 'fabric-loom' version '1.2-SNAPSHOT'
     id 'maven-publish'
 }
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
+version = "${project.mod_version}+${project.minecraft_version}"
+group = project.maven_group
 
-archivesBaseName = project.archives_base_name
-version          = "${project.mod_version}+${project.minecraft_version}"
-group            = project.maven_group
+base {
+    archivesName = project.archives_base_name
+}
 
 repositories {
     maven { url 'https://api.modrinth.com/maven' }
+}
+
+sourceSets {
+    testmod {
+        compileClasspath += main.compileClasspath
+        runtimeClasspath += main.runtimeClasspath
+    }
+}
+
+loom {
+    runs {
+        testmodClient {
+            client()
+            source sourceSets.testmod
+        }
+    }
 }
 
 dependencies {
@@ -20,11 +36,14 @@ dependencies {
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-    // Fabric API. This is technically optional, but you probably want it anyway.
+    // --- Fabric API ---
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    // Dev Environment Dependencies
-    // modLocalRuntime "maven.modrinth:modmenu:${project.mod_menu_version}"
+    // --- Dev Environment Dependencies ---
+    modLocalRuntime "maven.modrinth:modmenu:${project.modmenu_version}"
+
+    testmodImplementation sourceSets.main.output
+
 }
 
 processResources {
@@ -45,6 +64,9 @@ java {
     // if it is present.
     // If you remove this line, sources will not be generated.
     withSourcesJar()
+
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 jar {

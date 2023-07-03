@@ -1,0 +1,27 @@
+{
+    "schemaVersion": 1,
+    "id": "globalenderchesttest",
+    "version": "${version}",
+    "name": "GlobalEnderChestTestMod",
+    "description": "TBD",
+    "authors": [
+        "2Retr0"
+    ],
+    "contact": {
+        "homepage": "https://github.com/2Retr0/GlobalEnderChest/issues",
+        "issues": "https://github.com/2Retr0/GlobalEnderChest/issues",
+        "sources": "https://github.com/2Retr0/GlobalEnderChest"
+    },
+    "license": "MIT",
+    "icon": "assets/globalenderchesttest/icon.png",
+    "environment": "*",
+    "entrypoints": {
+        "client": [
+            "retr0.globalenderchesttest.GlobalEnderChestTest"
+        ]
+    },
+    "depends": {
+        "fabricloader": "*",
+        "minecraft": "*"
+    }
+}

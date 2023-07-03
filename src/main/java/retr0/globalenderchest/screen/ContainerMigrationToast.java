@@ -1,6 +1,7 @@
 package retr0.globalenderchest.screen;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.toast.SystemToast;
 import net.minecraft.client.toast.Toast;
 import net.minecraft.client.toast.ToastManager;
@@ -29,8 +30,8 @@ public class ContainerMigrationToast extends SystemToast {
 
 
     @Override
-    public Toast.Visibility draw(MatrixStack matrices, ToastManager manager, long startTime) {
-        super.draw(matrices, manager, startTime);
+    public Toast.Visibility draw(DrawContext context, ToastManager manager, long startTime) {
+        super.draw(context, manager, startTime);
 
         @SuppressWarnings("DataFlowIssue")
         var currentSyncId = manager.getClient().player.currentScreenHandler.syncId;
